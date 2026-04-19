@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products — GLOW UP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/backend/public/css/style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">GLOW UP ✨</a>
+      <div class="nav-links">
+        <a href="products.html">Shop</a>
+        <a href="products.html?cat=serums">Serums</a>
+        <a href="products.html?cat=moisturizers">Moisturizers</a>
+        <a href="products.html?cat=sunscreen">SPF</a>
+      </div>
+      <a href="cart.html" class="cart-btn">
+        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+      </a>
+    </nav>
+
+    <div class="page-header">
+      <h1 id="pageTitle">All Products</h1>
+      <p id="pageSubtitle">
+        Discover our full range of skin-loving formulas ✨
+      </p>
+    </div>
+
+    <div class="shop-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <h3>Filters</h3>
+
+        <div class="filter-group">
+          <h4>Category</h4>
+          <div class="filter-pills" id="categoryFilters">
+            <button class="pill active" data-cat="all">All</button>
+            <button class="pill" data-cat="serums">🧴 Serums</button>
+            <button class="pill" data-cat="moisturizers">
+              🫧 Moisturizers
+            </button>
+            <button class="pill" data-cat="cleansers">🫙 Cleansers</button>
+            <button class="pill" data-cat="sunscreen">☀️ SPF</button>
+            <button class="pill" data-cat="eyecare">👁️ Eye Care</button>
+            <button class="pill" data-cat="masks">🍃 Masks</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Skin Type</h4>
+          <div class="filter-pills">
+            <label class="pill-check"
+              ><input type="checkbox" value="oily" /> Oily</label
+            >
+            <label class="pill-check"
+              ><input type="checkbox" value="dry" /> Dry</label
+            >
+            <label class="pill-check"
+              ><input type="checkbox" value="sensitive" /> Sensitive</label
+            >
+            <label class="pill-check"
+              ><input type="checkbox" value="normal" /> Normal</label
+            >
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>
+            Max Price: <span id="priceVal" class="price-badge">$200</span>
+          </h4>
+          <input
+            type="range"
+            id="priceRange"
+            min="0"
+            max="200"
+            value="200"
+            step="5"
+            class="range-input"
+          />
+          <div class="range-labels"><span>$0</span><span>$200</span></div>
+        </div>
+      </aside>
+
+      <!-- PRODUCTS MAIN -->
+      <main class="products-main">
+        <div class="toolbar">
+          <p class="results-count" id="resultsCount">Showing all products</p>
+          <select class="sort-select" id="sortSelect">
+            <option value="default">✦ Featured</option>
+            <option value="price-asc">Price ↑ Low to High</option>
+            <option value="price-desc">Price ↓ High to Low</option>
+            <option value="name">Name A–Z</option>
+          </select>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+      </main>
+    </div>
+
+    <div class="toast" id="toast">Added to cart ✓</div>
+
+    <!--<script src="js/products-data.js"></script> -->
+    <script src="/backend/public/js/cart.js"></script>
+    <script src="/backend/public/js/products.js"></script>
+  </body>
+</html>

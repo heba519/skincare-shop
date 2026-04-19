@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GLOW UP — Skincare & Beauty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/backend/public/css/style.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">GLOW UP ✨</a>
+      <div class="nav-links">
+        <a href="products.html">Shop</a>
+        <a href="products.html?cat=serums">Serums</a>
+        <a href="products.html?cat=moisturizers">Moisturizers</a>
+        <a href="products.html?cat=sunscreen">SPF</a>
+      </div>
+      <a href="cart.html" class="cart-btn">
+        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+      </a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-tag">🌿 100% Clean Beauty</div>
+        <h1>Skin that<br /><span class="highlight">actually glows.</span></h1>
+        <p class="hero-sub">
+          Fresh formulas for fresh faces.<br />No nasties, just pure glow.
+        </p>
+        <div class="hero-btns">
+          <a href="products.html" class="btn-main">Shop Now →</a>
+          <a href="products.html?cat=bestsellers" class="btn-outline"
+            >Best Sellers</a
+          >
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>12K+</strong><span>Happy customers</span>
+          </div>
+          <div class="stat-div"></div>
+          <div class="stat">
+            <strong>4.9 ★</strong><span>Average rating</span>
+          </div>
+          <div class="stat-div"></div>
+          <div class="stat">
+            <strong>Free</strong><span>Shipping $50+</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img
+          src="https://images.unsplash.com/photo-1570194065650-d99fb4b38b17?w=700&q=85"
+          alt="Skincare products"
+        />
+        <div class="bubble bubble-1">✨ Vegan</div>
+        <div class="bubble bubble-2">🌸 Cruelty-free</div>
+        <div class="bubble bubble-3">💧 Hydrating</div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section">
+      <h2 class="section-title">Shop by Category</h2>
+      <div class="cats-grid">
+        <a
+          href="products.html?cat=serums"
+          class="cat-card"
+          style="--c: #fde68a"
+        >
+          <div class="cat-emoji">🧴</div>
+          <div class="cat-name">Serums</div>
+          <div class="cat-count">4 products</div>
+        </a>
+        <a
+          href="products.html?cat=moisturizers"
+          class="cat-card"
+          style="--c: #bbf7d0"
+        >
+          <div class="cat-emoji">🫧</div>
+          <div class="cat-name">Moisturizers</div>
+          <div class="cat-count">3 products</div>
+        </a>
+        <a
+          href="products.html?cat=cleansers"
+          class="cat-card"
+          style="--c: #bfdbfe"
+        >
+          <div class="cat-emoji">🫙</div>
+          <div class="cat-name">Cleansers</div>
+          <div class="cat-count">2 products</div>
+        </a>
+        <a
+          href="products.html?cat=sunscreen"
+          class="cat-card"
+          style="--c: #fecaca"
+        >
+          <div class="cat-emoji">☀️</div>
+          <div class="cat-name">SPF & Sun</div>
+          <div class="cat-count">1 product</div>
+        </a>
+        <a
+          href="products.html?cat=eyecare"
+          class="cat-card"
+          style="--c: #e9d5ff"
+        >
+          <div class="cat-emoji">👁️</div>
+          <div class="cat-name">Eye Care</div>
+          <div class="cat-count">1 product</div>
+        </a>
+        <a href="products.html?cat=masks" class="cat-card" style="--c: #fed7aa">
+          <div class="cat-emoji">🍃</div>
+          <div class="cat-name">Masks</div>
+          <div class="cat-count">1 product</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section class="section">
+      <div class="section-row">
+        <h2 class="section-title">Best Sellers 🔥</h2>
+        <a href="products.html" class="see-all">See all →</a>
+      </div>
+      <div class="products-grid" id="featuredProducts"></div>
+    </section>
+
+    <!-- PROMO BANNER -->
+    <section class="banner">
+      <div class="banner-inner">
+        <div class="banner-text">
+          <h2>Clean. Vegan.<br />Cruelty-Free. 💚</h2>
+          <p>
+            Every product is free from parabens, sulfates & synthetic
+            fragrances. Your skin deserves better.
+          </p>
+          <a href="products.html" class="btn-main white"
+            >Explore All Products →</a
+          >
+        </div>
+        <div class="banner-img">
+          <img
+            src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&q=80"
+            alt="Clean beauty"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">GLOW UP ✨</div>
+          <p>Science-backed skincare for your best skin ever.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="products.html">All Products</a>
+          <a href="products.html?cat=serums">Serums</a>
+          <a href="products.html?cat=moisturizers">Moisturizers</a>
+          <a href="products.html?cat=sunscreen">SPF</a>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns</a>
+          <a href="#">FAQ</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2025 GLOW UP. Made with 💚</div>
+    </footer>
+
+    <div class="toast" id="toast">Added to cart ✓</div>
+
+    <!-- <script src="js/products-data.js"></script> -->
+    <script src="/backend/public/js/main.js"></script>
+    <script src="/backend/public/js/cart.js"></script>
+  </body>
+</html>
