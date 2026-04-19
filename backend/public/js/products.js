@@ -32,7 +32,7 @@ function buildProductCard(p) {
   return `
     <div class="product-card">
       <div class="product-img-wrap">
-        <img src="${p.image}" alt="${p.name}" loading="lazy" />
+        <img src="http://localhost:5000${p.image}" alt="${p.name}" loading="lazy" />
         ${badge}
         <button class="quick-add" onclick="addToCart('${pid}')">+ Add to Cart</button>
       </div>

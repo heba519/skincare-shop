@@ -4,11 +4,14 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/errorHandler");
+const app = express();
+const path = require("path");
+
+// أضفه قبل الـ Routes
+app.use(express.static(path.join(__dirname, "public")));
 
 // ─── Connect DB ───────────────────────────────────────────────────────────────
 connectDB();
-
-const app = express();
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(cors({ origin: process.env.CLIENT_URL || "*" }));
@@ -18,6 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 // ─── Routes ───────────────────────────────────────────────────────────────────
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/orders", require("./routes/orderRoutes"));
+
+//ي حد يطلب /images/... → روح هاته من public/images
+app.use("/images", express.static("public/images"));
 
 // Health check
 app.get("/api/health", (req, res) =>
@@ -37,7 +43,7 @@ app.use((req, res) =>
 app.use(errorHandler);
 
 // ─── Start ────────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5501;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀  Server running on http://localhost:${PORT}`);
   console.log(`📦  Environment: ${process.env.NODE_ENV || "development"}`);

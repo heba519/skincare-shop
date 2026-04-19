@@ -13,7 +13,7 @@ const products = [
     oldPrice: null,
     badge: "Best Seller",
     rating: 5,
-    image: "/backend/public/images/Vitamin C serum to brighten skin.png",
+    image: "/images/Vitamin C serum to brighten skin.png",
     featured: true,
     stock: 80,
     description:
@@ -27,7 +27,7 @@ const products = [
     oldPrice: 62,
     badge: "Sale",
     rating: 5,
-    image: "/backend/public/images/Hyalu B5 Serum.png",
+    image: "/images/Hyalu B5 Serum.png",
     featured: true,
     stock: 120,
     description:
@@ -41,7 +41,7 @@ const products = [
     oldPrice: null,
     badge: null,
     rating: 4,
-    image: "/backend/public/images/Barrier Repair Moisturizer.png",
+    image: "/images/Barrier Repair Moisturizer.png",
     featured: true,
     stock: 60,
     description:
@@ -55,7 +55,7 @@ const products = [
     oldPrice: null,
     badge: "New",
     rating: 4,
-    image: "/backend/public/images/Repair Face Moisturizer_.png",
+    image: "/images/Repair Face Moisturizer_.png",
     featured: true,
     stock: 90,
     description:
@@ -69,7 +69,7 @@ const products = [
     oldPrice: null,
     badge: null,
     rating: 5,
-    image: "/backend/public/images/gentle foam cleanser.png",
+    image: "/images/gentle foam cleanser.png",
     featured: false,
     stock: 150,
     description:
@@ -83,7 +83,7 @@ const products = [
     oldPrice: 34,
     badge: "Sale",
     rating: 4,
-    image: "/backend/public/images/Micellar Cleansing Water.png",
+    image: "/images/Micellar Cleansing Water.png",
     featured: false,
     stock: 200,
     description:
@@ -97,7 +97,7 @@ const products = [
     oldPrice: null,
     badge: "Must-Have",
     rating: 5,
-    image: "/backend/public/images/sunscreen.png",
+    image: "/images/sunscreen.png",
     featured: false,
     stock: 110,
     description:
@@ -111,7 +111,7 @@ const products = [
     oldPrice: null,
     badge: "New",
     rating: 5,
-    image: "/backend/public/images/Retinol Renewal Night Serum.png",
+    image: "/images/Retinol Renewal Night Serum.png",
     featured: false,
     stock: 45,
     description:
@@ -125,7 +125,7 @@ const products = [
     oldPrice: null,
     badge: null,
     rating: 4,
-    image: "/backend/public/images/Eye Contour Repair Gel.png",
+    image: "/images/Eye Contour Repair Gel.png",
     featured: false,
     stock: 70,
     description:
@@ -139,7 +139,7 @@ const products = [
     oldPrice: 48,
     badge: "Sale",
     rating: 4,
-    image: "/backend/public/images/Kaolin Clay Detox Mask.png",
+    image: "/images/Kaolin Clay Detox Mask.png",
     featured: false,
     stock: 85,
     description:
@@ -153,7 +153,7 @@ const products = [
     oldPrice: null,
     badge: null,
     rating: 5,
-    image: "/backend/public/images/Niacinamide Pore Refiner.png",
+    image: "/images/Niacinamide Pore Refiner.png",
     featured: false,
     stock: 130,
     description:
@@ -167,7 +167,7 @@ const products = [
     oldPrice: null,
     badge: "Premium",
     rating: 5,
-    image: "/backend/public/images/Peptide Anti-Aging Cream.png",
+    image: "/images/Peptide Anti-Aging Cream.png",
     featured: false,
     stock: 35,
     description:
