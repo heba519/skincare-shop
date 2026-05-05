@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <h2>Dashboard</h2>
+        <ul>
+          <li>Products</li>
+          <li>Categories</li>
+        </ul>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <!-- ================= PRODUCTS ================= -->
+        <section class="card">
+          <div class="header">
+            <h3>Products</h3>
+            <button onclick="showAddForm()">+ Add</button>
+          </div>
+
+          <!-- FORM -->
+          <div id="productForm" style="margin: 10px 0; display: none">
+            <input id="name" placeholder="Product Name" />
+            <input id="price" placeholder="Price" />
+
+            <button onclick="addProduct()">Save</button>
+            <button onclick="updateProduct()">Update</button>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="productTable"></tbody>
+          </table>
+        </section>
+
+        <!-- ================= CATEGORIES ================= -->
+        <section class="card">
+          <div class="header">
+            <h3>Categories</h3>
+            <button onclick="addCategory()">+ Add</button>
+          </div>
+
+          <table>
+            <tbody id="categoryTable"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>

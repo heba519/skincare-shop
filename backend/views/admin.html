@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial;
+        background: #f1f5f9;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 200px;
+        background: #1e293b;
+        color: white;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .sidebar h2 {
+        margin-bottom: 20px;
+      }
+
+      .sidebar button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        background: #334155;
+        color: white;
+        cursor: pointer;
+      }
+
+      /* Content */
+      .content {
+        flex: 1;
+        padding: 20px;
+      }
+
+      input {
+        padding: 8px;
+        margin-right: 10px;
+      }
+
+      button {
+        padding: 6px 10px;
+        background: #22c55e;
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      ul {
+        margin-top: 20px;
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        background: white;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h2>Admin</h2>
+        <button onclick="showSection('categories')">Categories</button>
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+        <!-- Categories Section -->
+        <div id="categoriesSection">
+          <h2>Categories</h2>
+
+          <!-- Add -->
+          <input id="catName" placeholder="Category name" />
+          <button onclick="addCategory()">Add</button>
+
+          <!-- List -->
+          <ul id="categoriesList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API = "http://localhost:5000/api/v1/categories";
+
+      //  GET
+      async function getCategories() {
+        const res = await fetch(API);
+        const data = await res.json();
+
+        const list = document.getElementById("categoriesList");
+        list.innerHTML = "";
+
+        data.data.forEach((cat) => {
+          list.innerHTML += `
+      <li>
+        ${cat.name}
+        <div>
+          <button onclick="editCategory('${cat._id}')">Edit</button>
+          <button onclick="deleteCategory('${cat._id}')">Delete</button>
+        </div>
+      </li>
+    `;
+        });
+      }
+
+      //  ADD
+      async function addCategory() {
+        const name = document.getElementById("catName").value;
+
+        await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name }),
+        });
+
+        document.getElementById("catName").value = "";
+        getCategories();
+      }
+
+      //  EDIT
+      async function editCategory(id) {
+        const newName = prompt("New name:");
+
+        if (!newName) return;
+
+        await fetch(`${API}/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: newName }),
+        });
+
+        getCategories();
+      }
+
+      //  DELETE
+      async function deleteCategory(id) {
+        await fetch(`${API}/${id}`, {
+          method: "DELETE",
+        });
+
+        getCategories();
+      }
+
+      // Navigation (لو هتزودي صفحات بعدين)
+      function showSection(section) {
+        document.getElementById("categoriesSection").style.display = "block";
+      }
+
+      // Load أول ما الصفحة تفتح
+      getCategories();
+    </script>
+  </body>
+</html>

@@ -19,6 +19,7 @@ router.get("/:id", getProductById);
 
 // Admin routes (add auth middleware here later)
 router.post("/", createProduct);
+
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 

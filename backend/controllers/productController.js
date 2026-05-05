@@ -91,29 +91,51 @@ const getProductById = async (req, res) => {
 };
 
 // ─── POST /api/products ───────────────────────────────────────────────────────
-const createProduct = async (req, res) => {
+/*const createProduct = async (req, res) => {
   try {
     const product = await Product.create(req.body);
     res.status(201).json({ success: true, product });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
-};
+};*/
+const createProduct = async (req, res) => {
+  try {
+    console.log("CREATE HIT");
+    console.log("BODY:", req.body);
 
+    const product = await Product.create(req.body);
+
+    console.log("SAVED PRODUCT:", product);
+
+    res.status(201).json({
+      success: true,
+      product,
+    });
+  } catch (err) {
+    console.log("ERROR:", err.message);
+
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
 // ─── PUT /api/products/:id ────────────────────────────────────────────────────
 const updateProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!product)
-      return res
-        .status(404)
-        .json({ success: false, message: "Product not found" });
-    res.json({ success: true, product });
+    const updated = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        name: req.body.name,
+        price: Number(req.body.price),
+      },
+      { new: true },
+    );
+
+    res.json(updated);
   } catch (err) {
-    res.status(400).json({ success: false, message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 

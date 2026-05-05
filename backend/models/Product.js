@@ -14,17 +14,9 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
     category: {
-      type: String,
-      required: [true, "Category is required"],
-      enum: [
-        "serums",
-        "moisturizers",
-        "cleansers",
-        "sunscreen",
-        "eyecare",
-        "masks",
-      ],
-      lowercase: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
     },
     price: {
       type: Number,
