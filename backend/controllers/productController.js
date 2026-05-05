@@ -17,7 +17,15 @@ const getAllProducts = async (req, res) => {
 
     // Build filter object
     const filter = {};
-    if (category && category !== "all") filter.category = category;
+    const Category = require("../models/categoryModel");
+
+    if (category && category !== "all") {
+      const cat = await Category.findOne({ slug: category });
+
+      if (cat) {
+        filter.category = cat._id;
+      }
+    }
     if (maxPrice) filter.price = { $lte: Number(maxPrice) };
     if (featured === "true") filter.featured = true;
 
@@ -79,7 +87,7 @@ const getCategories = async (req, res) => {
 // ─── GET /api/products/:id ────────────────────────────────────────────────────
 const getProductById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate("category");
     if (!product)
       return res
         .status(404)
@@ -101,20 +109,18 @@ const getProductById = async (req, res) => {
 };*/
 const createProduct = async (req, res) => {
   try {
-    console.log("CREATE HIT");
-    console.log("BODY:", req.body);
-
-    const product = await Product.create(req.body);
-
-    console.log("SAVED PRODUCT:", product);
+    const product = await Product.create({
+      name: req.body.name,
+      price: Number(req.body.price),
+      image: req.body.image,
+      category: req.body.category,
+    });
 
     res.status(201).json({
       success: true,
       product,
     });
   } catch (err) {
-    console.log("ERROR:", err.message);
-
     res.status(500).json({
       success: false,
       message: err.message,
@@ -129,11 +135,16 @@ const updateProduct = async (req, res) => {
       {
         name: req.body.name,
         price: Number(req.body.price),
+        image: req.body.image,
+        category: req.body.category,
       },
       { new: true },
     );
 
-    res.json(updated);
+    res.json({
+      success: true,
+      product: updated,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -2,10 +2,25 @@ const Category = require("../models/categoryModel");
 
 // CREATE
 exports.createCategory = async (req, res) => {
-  const category = await Category.create(req.body);
-  res.json(category);
-};
+  try {
+    const name = req.body.name;
 
+    const category = await Category.create({
+      name,
+      slug: name.toLowerCase(),
+    });
+
+    res.status(201).json({
+      success: true,
+      category,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
 // READ
 exports.getCategories = async (req, res) => {
   const categories = await Category.find();

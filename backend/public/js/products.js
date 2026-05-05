@@ -8,7 +8,7 @@ let PRODUCTS = [];
 let activeCategory = "all";
 let maxPrice = 200;
 let sortOrder = "default";
-
+let CATEGORIES = [];
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const BADGE_CLASSES = {
   Sale: "badge-sale",
@@ -54,10 +54,38 @@ async function fetchProducts(queryString = "") {
   return PRODUCTS;
 }
 
+//fetch category
+async function fetchCategories() {
+  const res = await fetch(`${API_BASE}/categories`);
+  const data = await res.json();
+  return data;
+}
+
+async function renderCategories() {
+  const container = document.getElementById("categoryFilters");
+  if (!container) return;
+
+  const categories = await fetchCategories();
+
+  container.innerHTML = `
+    <button class="pill active" data-cat="all">All</button>
+    ${categories
+      .map(
+        (c) => `
+        <button class="pill" data-cat="${c.name.toLowerCase()}">
+          ${c.name}
+        </button>
+      `,
+      )
+      .join("")}
+  `;
+}
 // ─── Init ─────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const cat = params.get("cat");
+
+  await renderCategories();
   if (cat) {
     activeCategory = cat;
     setActive(cat);
@@ -66,13 +94,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await renderProducts();
 
-  document.querySelectorAll(".pill[data-cat]").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      activeCategory = btn.dataset.cat;
-      setActive(activeCategory);
-      setTitle(activeCategory);
-      await renderProducts();
-    });
+  document.addEventListener("click", async (e) => {
+    const btn = e.target.closest(".pill[data-cat]");
+    if (!btn) return;
+
+    activeCategory = btn.dataset.cat;
+
+    setActive(activeCategory);
+    setTitle(activeCategory);
+
+    await renderProducts();
   });
 
   const slider = document.getElementById("priceRange");

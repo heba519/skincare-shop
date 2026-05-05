@@ -3,12 +3,26 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const connectDB = require("./config/db");
 const Product = require("./models/Product");
+const Category = require("./models/categoryModel");
+
+/* ───────────────────── CATEGORIES DATA ───────────────────── */
+
+const categoriesData = [
+  { name: "Serums" },
+  { name: "Moisturizers" },
+  { name: "Cleansers" },
+  { name: "Sunscreen" },
+  { name: "Eyecare" },
+  { name: "Masks" },
+];
+
+/* ───────────────────── PRODUCTS DATA ───────────────────── */
 
 const products = [
   {
     name: "Vitamin C Brightening Serum",
     brand: "GLOW UP",
-    category: "serums",
+    category: "Serums",
     price: 58,
     oldPrice: null,
     badge: "Best Seller",
@@ -22,7 +36,7 @@ const products = [
   {
     name: "Hyaluronic Acid Deep Hydration",
     brand: "GLOW UP",
-    category: "serums",
+    category: "Serums",
     price: 46,
     oldPrice: 62,
     badge: "Sale",
@@ -36,7 +50,7 @@ const products = [
   {
     name: "Barrier Repair Moisturizer",
     brand: "GLOW UP",
-    category: "moisturizers",
+    category: "Moisturizers",
     price: 64,
     oldPrice: null,
     badge: null,
@@ -50,7 +64,7 @@ const products = [
   {
     name: "Oil-Free Matte Moisturizer",
     brand: "GLOW UP",
-    category: "moisturizers",
+    category: "Moisturizers",
     price: 52,
     oldPrice: null,
     badge: "New",
@@ -64,7 +78,7 @@ const products = [
   {
     name: "Gentle Foam Cleanser",
     brand: "GLOW UP",
-    category: "cleansers",
+    category: "Cleansers",
     price: 32,
     oldPrice: null,
     badge: null,
@@ -78,7 +92,7 @@ const products = [
   {
     name: "Micellar Cleansing Water",
     brand: "GLOW UP",
-    category: "cleansers",
+    category: "Cleansers",
     price: 26,
     oldPrice: 34,
     badge: "Sale",
@@ -92,7 +106,7 @@ const products = [
   {
     name: "SPF 50+ Daily Sunscreen",
     brand: "GLOW UP",
-    category: "sunscreen",
+    category: "Sunscreen",
     price: 38,
     oldPrice: null,
     badge: "Must-Have",
@@ -106,7 +120,7 @@ const products = [
   {
     name: "Retinol Renewal Night Serum",
     brand: "GLOW UP",
-    category: "serums",
+    category: "Serums",
     price: 72,
     oldPrice: null,
     badge: "New",
@@ -120,7 +134,7 @@ const products = [
   {
     name: "Eye Contour Repair Gel",
     brand: "GLOW UP",
-    category: "eyecare",
+    category: "Eyecare",
     price: 44,
     oldPrice: null,
     badge: null,
@@ -134,7 +148,7 @@ const products = [
   {
     name: "Kaolin Clay Detox Mask",
     brand: "GLOW UP",
-    category: "masks",
+    category: "Masks",
     price: 36,
     oldPrice: 48,
     badge: "Sale",
@@ -148,7 +162,7 @@ const products = [
   {
     name: "Niacinamide Pore Refiner",
     brand: "GLOW UP",
-    category: "serums",
+    category: "Serums",
     price: 42,
     oldPrice: null,
     badge: null,
@@ -162,7 +176,7 @@ const products = [
   {
     name: "Peptide Anti-Aging Cream",
     brand: "GLOW UP",
-    category: "moisturizers",
+    category: "Moisturizers",
     price: 88,
     oldPrice: null,
     badge: "Premium",
@@ -175,19 +189,48 @@ const products = [
   },
 ];
 
+/* ───────────────────── HELPER ───────────────────── */
+
+const getCategoryId = (name, categories) => {
+  const found = categories.find(
+    (c) => c.name.toLowerCase() === name.toLowerCase(),
+  );
+  return found ? found._id : null;
+};
+
+/* ───────────────────── SEED FUNCTION ───────────────────── */
+
 const seed = async () => {
-  await connectDB();
   try {
+    await connectDB();
+
+    // 1. Clear collections
+    await Category.deleteMany({});
     await Product.deleteMany({});
-    console.log("🗑️  Cleared existing products");
-    const inserted = await Product.insertMany(products);
-    console.log(`✅  Seeded ${inserted.length} products successfully`);
+
+    console.log(" Cleared existing data");
+
+    // 2. Insert categories
+    const categories = await Category.insertMany(categoriesData);
+    console.log(" Categories seeded");
+
+    // 3. Map products categories to ObjectIds
+    const fixedProducts = products.map((p) => ({
+      ...p,
+      category: getCategoryId(p.category, categories),
+    }));
+
+    // 4. Insert products
+    const inserted = await Product.insertMany(fixedProducts);
+    console.log(` Seeded ${inserted.length} products successfully`);
   } catch (err) {
-    console.error("❌  Seed failed:", err.message);
+    console.error(" Seed failed:", err.message);
   } finally {
     await mongoose.disconnect();
-    console.log("🔌  Disconnected from MongoDB");
+    console.log(" Disconnected from MongoDB");
   }
 };
+
+/* ───────────────────── RUN ───────────────────── */
 
 seed();

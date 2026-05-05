@@ -26,9 +26,13 @@
           </div>
 
           <!-- FORM -->
-          <div id="productForm" style="margin: 10px 0; display: none">
+          <div id="productForm" style="display: none; margin: 10px 0">
             <input id="name" placeholder="Product Name" />
             <input id="price" placeholder="Price" />
+
+            <select id="category"></select>
+
+            <input id="image" placeholder="Image URL" />
 
             <button onclick="addProduct()">Save</button>
             <button onclick="updateProduct()">Update</button>
